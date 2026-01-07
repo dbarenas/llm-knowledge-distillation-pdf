@@ -1,0 +1,47 @@
+[project]
+name = "ts-pdf-pipeline"
+version = "0.1.0"
+description = "Teacher-student PDF labeling pipeline with extensible adapters"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Codex" }]
+
+dependencies = [
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "pdfplumber>=0.11",
+  "requests>=2.31",
+  "typer>=0.12",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+llm = [
+  "openai>=1.30",
+  "langchain-openai>=0.1.22",
+  "langchain-ollama>=0.1.3",
+  "langchain-core>=0.2.36",
+]
+
+test = [
+  "pytest>=8.2",
+]
+
+[project.scripts]
+ts-pdf-pipeline = "ts_pdf_pipeline.cli:app"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+
+testpaths = ["tests"]
